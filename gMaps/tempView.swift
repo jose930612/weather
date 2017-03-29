@@ -25,6 +25,12 @@ let NoOfGlasses = 8
         }
     }
     
+    @IBInspectable var fontSize:CGFloat = 15.0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     @IBInspectable var radius:CGFloat = max(55.0, 55.0) {
         didSet {
             setNeedsDisplay()
@@ -69,12 +75,11 @@ let NoOfGlasses = 8
         let fieldColor: UIColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 1.0)
         
         // set the font to Helvetica Neue 18
-        let fieldFont = UIFont(name: "HelveticaNeue-Bold", size: 15)
+        let fieldFont = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
         
         // set the line spacing to 6
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.alignment = .center
-        paraStyle.lineSpacing = 6.0
         
         // set the Obliqueness to 0.1
         let skew = 0
@@ -86,7 +91,7 @@ let NoOfGlasses = 8
             NSFontAttributeName: fieldFont!
         ]
         
-        temp.draw(in: CGRect(x:(self.bounds.width/2)-(120/2), y:(self.bounds.height/2)-(27/2.6), width:120.0, height:48.0), withAttributes: attributes as? [String : Any])
+        temp.draw(in: CGRect(x:(self.bounds.width/2)-(120/2), y:(self.bounds.height/2)-(fontSize/1.6), width:120.0, height:fontSize), withAttributes: attributes as? [String : Any])
         
         
         detailPopup.setTitle("I", for: .normal)
@@ -153,6 +158,7 @@ let NoOfGlasses = 8
         self.shrink = 8.0
         self.detailPopup.isHidden = false
         self.refreshButton.isHidden = false
+        self.fontSize = 20
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -173,27 +179,22 @@ let NoOfGlasses = 8
             print("ButtonX: (\(infoPositionX), \(infoPositionY))")
             
             let infoBtnDistX = currentPoint.x - infoPositionX
-            let distanceY = infoPositionY - currentPoint.y
+            let infoBtnDistY = infoPositionY - currentPoint.y
             
-            print("distanceX: \(infoBtnDistX), distanceY: \(distanceY)")
-            if infoBtnDistX >= -10 && infoBtnDistX <= 10 {
+            print("distanceX: \(infoBtnDistX), distanceY: \(infoBtnDistY)")
+            if (infoBtnDistX >= -10 && infoBtnDistX <= 10) && (infoBtnDistY >= -10 && infoBtnDistY <= 10) {
                 self.detailPopup.sendActions(for: .touchUpInside)
             }
             
-            if refreshBtnDistY >= -10 && refreshBtnDistY <= 10 {
+            if (refreshBtnDistY >= -10 && refreshBtnDistY <= 10) && (refreshBtnDistX >= -10 && refreshBtnDistX <= 10) {
                 self.refreshButton.sendActions(for: .touchUpInside)
             }
-            
-            
-            
-            
-            
-            // do something with your currentPoint
         }
         self.radius = max(55.0, 55.0)
         self.shrink = 0.0
         self.detailPopup.isHidden = true
         self.refreshButton.isHidden = true
+        self.fontSize = 15
     }
     
 
