@@ -10,9 +10,11 @@ import UIKit
 
 class PopupViewController: UIViewController {
     
+    @IBOutlet weak var popView: UIView!
     @IBOutlet weak var humidityInfo: UILabel!
     @IBOutlet weak var pressureInfo: UILabel!
     @IBOutlet weak var weatherInfo: UILabel!
+    @IBOutlet weak var weatherImgIcon: UIImageView!
     
 
     override func viewDidLoad() {
@@ -20,11 +22,13 @@ class PopupViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0)
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        /*let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.insertSubview(blurEffectView, at: 0)
+        view.insertSubview(blurEffectView, at: 0)*/
+        
+        popView.backgroundColor = UIColor(red:0.26, green:0.52, blue:0.96, alpha:1.0)
 
         // Do any additional setup after loading the view.
     }

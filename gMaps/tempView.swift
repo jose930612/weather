@@ -17,7 +17,7 @@ let NoOfGlasses = 8
     let detailPopup = UIButton()
     let refreshButton = UIButton()
     
-    @IBInspectable var counterColor: UIColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6)
+    @IBInspectable var counterColor: UIColor = UIColor(red:0.26, green:0.52, blue:0.96, alpha:1.0)
     
     @IBInspectable var temp = "23ºC" {
         didSet {
@@ -72,7 +72,7 @@ let NoOfGlasses = 8
         path.stroke()
         
         
-        let fieldColor: UIColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 1.0)
+        let fieldColor: UIColor = UIColor(red:0.92, green:0.26, blue:0.21, alpha:1.0)
         
         // set the font to Helvetica Neue 18
         let fieldFont = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
@@ -94,9 +94,10 @@ let NoOfGlasses = 8
         temp.draw(in: CGRect(x:(self.bounds.width/2)-(120/2), y:(self.bounds.height/2)-(fontSize/1.6), width:120.0, height:fontSize), withAttributes: attributes as? [String : Any])
         
         
-        detailPopup.setTitle("I", for: .normal)
-        detailPopup.setTitleColor(UIColor.black, for: UIControlState.normal)
-        detailPopup.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        //detailPopup.setTitle("I", for: .normal)
+        detailPopup.setImage(UIImage(named: "info.png"), for: .normal)
+        //detailPopup.setTitleColor(UIColor.black, for: UIControlState.normal)
+        //detailPopup.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         detailPopup.backgroundColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0)
         detailPopup.layer.cornerRadius = 10
         //detailPopup.layer.borderColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).cgColor
@@ -109,9 +110,10 @@ let NoOfGlasses = 8
         
         
         
-        refreshButton.setTitle("R", for: .normal)
-        refreshButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        refreshButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        //refreshButton.setTitle("R", for: .normal)
+        //refreshButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        refreshButton.setImage(UIImage(named: "refresh.png"), for: .normal)
+        //refreshButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         refreshButton.layer.cornerRadius = 10
         //refreshButton.layer.borderColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).cgColor
         //refreshButton.layer.borderWidth = 2
@@ -147,7 +149,7 @@ let NoOfGlasses = 8
         refPath.close()
         
         //If you want to stroke it with a red color
-        UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).setStroke()
+        //UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).setStroke()
         refPath.stroke()
         
     }
@@ -164,7 +166,7 @@ let NoOfGlasses = 8
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             
-            print("Touch: \(touch.location(in: self))")
+            //print("Touch: \(touch.location(in: self))")
             let currentPoint = touch.location(in: self)
             
             let infoPositionY = detailPopup.frame.origin.y + (detailPopup.frame.height/2)
@@ -176,12 +178,12 @@ let NoOfGlasses = 8
             let refreshBtnDistX = currentPoint.x - refreshPositionX
             let refreshBtnDistY = refreshPositionY - currentPoint.y
             
-            print("ButtonX: (\(infoPositionX), \(infoPositionY))")
+            //print("ButtonX: (\(infoPositionX), \(infoPositionY))")
             
             let infoBtnDistX = currentPoint.x - infoPositionX
             let infoBtnDistY = infoPositionY - currentPoint.y
             
-            print("distanceX: \(infoBtnDistX), distanceY: \(infoBtnDistY)")
+            //print("distanceX: \(infoBtnDistX), distanceY: \(infoBtnDistY)")
             if (infoBtnDistX >= -10 && infoBtnDistX <= 10) && (infoBtnDistY >= -10 && infoBtnDistY <= 10) {
                 self.detailPopup.sendActions(for: .touchUpInside)
             }

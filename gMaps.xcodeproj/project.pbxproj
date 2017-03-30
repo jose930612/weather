@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48267DC91E8C84DD00337499 /* cloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DC81E8C84DD00337499 /* cloudy.png */; };
+		48267DCD1E8C888300337499 /* sunny.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DCC1E8C888300337499 /* sunny.png */; };
+		48267DCF1E8C8CF300337499 /* rainy.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DCE1E8C8CF300337499 /* rainy.png */; };
+		48267DD31E8C972D00337499 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DD21E8C972D00337499 /* refresh.png */; };
+		48267DD51E8C98DA00337499 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DD41E8C98DA00337499 /* info.png */; };
 		48886D331E8AF1F6005AC1D8 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */; };
 		4898D8B91E5FB80600FF29EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898D8B81E5FB80600FF29EB /* AppDelegate.swift */; };
 		4898D8BB1E5FB80600FF29EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898D8BA1E5FB80600FF29EB /* ViewController.swift */; };
@@ -21,6 +26,11 @@
 
 /* Begin PBXFileReference section */
 		08A6E76F65176ACB74403024 /* Pods-gMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gMaps.release.xcconfig"; path = "Pods/Target Support Files/Pods-gMaps/Pods-gMaps.release.xcconfig"; sourceTree = "<group>"; };
+		48267DC81E8C84DD00337499 /* cloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudy.png; sourceTree = "<group>"; };
+		48267DCC1E8C888300337499 /* sunny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunny.png; sourceTree = "<group>"; };
+		48267DCE1E8C8CF300337499 /* rainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainy.png; sourceTree = "<group>"; };
+		48267DD21E8C972D00337499 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		48267DD41E8C98DA00337499 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		4898D8B51E5FB80600FF29EB /* gMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4898D8B81E5FB80600FF29EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +94,11 @@
 				48C54DE21E89CF1C00C74AAD /* tempView.swift */,
 				48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */,
 				4898D8BC1E5FB80600FF29EB /* Main.storyboard */,
+				48267DC81E8C84DD00337499 /* cloudy.png */,
+				48267DCC1E8C888300337499 /* sunny.png */,
+				48267DD21E8C972D00337499 /* refresh.png */,
+				48267DD41E8C98DA00337499 /* info.png */,
+				48267DCE1E8C8CF300337499 /* rainy.png */,
 				48A7485B1E6BBA13001475C1 /* myLocation.png */,
 				4898D8BF1E5FB80600FF29EB /* Assets.xcassets */,
 				4898D8C11E5FB80600FF29EB /* LaunchScreen.storyboard */,
@@ -163,8 +178,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48267DCF1E8C8CF300337499 /* rainy.png in Resources */,
 				4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */,
+				48267DC91E8C84DD00337499 /* cloudy.png in Resources */,
 				4898D8C01E5FB80600FF29EB /* Assets.xcassets in Resources */,
+				48267DD51E8C98DA00337499 /* info.png in Resources */,
+				48267DD31E8C972D00337499 /* refresh.png in Resources */,
+				48267DCD1E8C888300337499 /* sunny.png in Resources */,
 				48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */,
 				4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */,
 				4898D8BE1E5FB80600FF29EB /* Main.storyboard in Resources */,

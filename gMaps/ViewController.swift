@@ -27,6 +27,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var pressureText:String!
     var humidityText:String!
     var weatherText:String!
+    var weatherCode:Int!
+    
+    var imgIconUrl:URL!
     
 
     override func viewDidLoad() {
@@ -55,6 +58,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         self.popOverVC.humidityInfo.text = self.humidityText
         self.popOverVC.pressureInfo.text = self.pressureText
         self.popOverVC.weatherInfo.text = self.weatherText
+        
+        var imgName:String!
+        
+        if weatherCode == 800 {
+            imgName="sunny"
+        }
+        
+        if weatherCode > 800 && weatherCode < 900 {
+            imgName="cloudy"
+        }
+        
+        if (weatherCode >= 900 && weatherCode < 1000) || (weatherCode >= 500 && weatherCode < 600) || (weatherCode >= 200 && weatherCode < 400) {
+            imgName="rainy"
+        }
+        
+        
+        
+        self.popOverVC.weatherImgIcon.image = UIImage(named:imgName)
         
     }
     
@@ -116,6 +137,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             mapView.camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
             request(coordinates: location.coordinate)
             
+            /*self.myLocationMarker.position = location.coordinate
+            self.myLocationMarker.map = mapView*/
+            
             locationManager.stopUpdatingLocation()
         }
         
@@ -148,8 +172,43 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             DispatchQueue.main.async(execute: {
                 
                 if let weather = results["weather"] as? [[String:Any]], !weather.isEmpty {
-                    print(weather[0]["description"]!) // the value is an optional.
+                    //print(weather[0]["description"]!) // the value is an optional.
+                    
+                    self.weatherCode = NumberFormatter().number(from: "\(weather[0]["id"]!)") as Int!
+                    //print(weather[0])
                     self.weatherText = "\(weather[0]["description"]!)"
+                    
+                    let weatherIcon = "\(weather[0]["icon"]!)"
+                    
+                    self.imgIconUrl  = URL(string: "http://openweathermap.org/img/w/\(weatherIcon).png")
+                    
+                    /*let session = URLSession(configuration: .default)
+                    
+                    // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+                    let downloadPicTask = session.dataTask(with: self.imgIconUrl) { (data, response, error) in
+                        // The download has finished.
+                        if let e = error {
+                            print("Error downloading cat picture: \(e)")
+                        } else {
+                            // No errors found.
+                            // It would be weird if we didn't have a response, so check for that too.
+                            if let res = response as? HTTPURLResponse {
+                                print("Downloaded cat picture with response code \(res.statusCode)")
+                                if let imageData = data {
+                                    // Finally convert that Data into an image and do what you wish with it.
+                                    self.myLocationMarker.icon = UIImage(data: imageData)
+                                    // Do something with your image.
+                                } else {
+                                    print("Couldn't get image: Image is nil")
+                                }
+                            } else {
+                                print("Couldn't get response code for some reason")
+                            }
+                        }
+                    }
+                    
+                    downloadPicTask.resume()*/
+                    
                 }
                 
                 //self.tableView.reloadData()
@@ -162,8 +221,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                 let doubleStr = String(format: "%.2f", pressure) // "3.14"
                 self.temperature.temp = "\(NSNumber(value: celsius))ºC"
                 
-                self.pressureText = "Pressure: \(doubleStr) Atm"
-                self.humidityText = "Humidity: \(NSNumber(value: (results["main"]?["humidity"]) as! Double))%"
+                self.pressureText = "\(doubleStr) Atm"
+                self.humidityText = "\(NSNumber(value: (results["main"]?["humidity"]) as! Double))%"
             })
             
             }.resume()
