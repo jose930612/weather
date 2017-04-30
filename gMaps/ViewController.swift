@@ -153,7 +153,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             
             
             mapView.camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
-            print("SCREEEEEEEEEAM")
+            //print("SCREEEEEEEEEAM")
             if isStationAvailable {
                 //print("Station is available")
                 stationDataRequest(coordinates: location.coordinate)
@@ -189,7 +189,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         session.dataTask(with: request) {data, response, error in
             guard error == nil else {
                 //print(error!)
-                print("ERROR!!!!")
+                //print("ERROR!!!!")
                 self.isStationAvailable = false
                 self.request(coordinates: coordinates)
                 return
