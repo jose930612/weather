@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "135540515C7F1F33A360655EFC9A6C17E7175803",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "135540515C7F1F33A360655EFC9A6C17E7175803" : 9223372036854775807,
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "66977147-E7F8-4A0D-878A-36035F0D77A7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "135540515C7F1F33A360655EFC9A6C17E7175803" : "gMaps\/",
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "gMaps\/Alamofire\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "gMaps",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "gMaps.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jose930612\/weather.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "135540515C7F1F33A360655EFC9A6C17E7175803"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67620B5EFA902936DF04070AF595B76AB0333747"
+    }
+  ]
+}

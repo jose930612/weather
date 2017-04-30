@@ -21,8 +21,8 @@
 		70324FDF1FBB41BEA92DE76E00BD3E96 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
 		797E3D45041FEAF276040D08649252E6 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		7981176B7508295418F9B5D5D79E96B1 /* Pods-gMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-gMaps.release.xcconfig"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A389AB833A22F561DAB42FD725E3E2E0 /* libPods-gMaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-gMaps.a"; path = "libPods-gMaps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A389AB833A22F561DAB42FD725E3E2E0 /* libPods-gMaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gMaps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA27457EFEED00524FBBA94FAC7541D7 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Subspecs/Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		BF3DF379761A5D80C0ED64EAA0BDEA19 /* Pods-gMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-gMaps.debug.xcconfig"; sourceTree = "<group>"; };
 		C3B9B71AD64734693F0E4525C4345F62 /* Pods-gMaps-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-gMaps-dummy.m"; sourceTree = "<group>"; };
@@ -48,7 +48,6 @@
 				475420FA59EFC8377CF994A338979247 /* Frameworks */,
 				4F6C8AC648A5703DF2BEC96A882D19E9 /* Resources */,
 			);
-			name = GooglePlaces;
 			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
@@ -58,7 +57,6 @@
 				B2F22323EA3B1ADB4F96376E3F709A68 /* Base */,
 				488E301C4ACDDA928635C4886F5F6158 /* Maps */,
 			);
-			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};

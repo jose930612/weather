@@ -19,7 +19,7 @@ let NoOfGlasses = 8
     
     @IBInspectable var counterColor: UIColor = UIColor(red:0.26, green:0.52, blue:0.96, alpha:1.0)
     
-    @IBInspectable var temp = "23ºC" {
+    @IBInspectable var temp = "--ºC" {
         didSet {
             setNeedsDisplay()
         }

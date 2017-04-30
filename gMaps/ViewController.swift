@@ -10,9 +10,6 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-//var weather:[String]!=[]
-
-
 class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -30,22 +27,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var weatherCode:Int!
     
     var imgIconUrl:URL!
-    
+    var isStationAvailable = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager.delegate = self
+        
         locationManager.requestWhenInUseAuthorization()
         
         temperature.detailPopup.addTarget(self, action: #selector(ViewController.popUpView), for: UIControlEvents.touchUpInside)
         
-        temperature.refreshButton.addTarget(self, action: #selector(ViewController.request), for: UIControlEvents.touchUpInside)
+        temperature.refreshButton.addTarget(self, action: #selector(ViewController.updateWeather), for: UIControlEvents.touchUpInside)
         
         self.temperature.detailPopup.isHidden = true
         self.temperature.refreshButton.isHidden = true
+        
+        
     }
     
+    func updateWeather() {
+        if isStationAvailable {
+            print("stationDataRequest")
+            stationDataRequest(coordinates: (locationManager.location?.coordinate)!)
+        } else {
+            print("request")
+            request(coordinates: (locationManager.location?.coordinate)!)
+        }
+    }
     
     func popUpView() {
         
@@ -125,7 +134,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             mapView.mapType = GoogleMaps.kGMSTypeNormal
             mapView.settings.myLocationButton = true
             mapView.accessibilityElementsHidden = false
-
         }
     }
     
@@ -135,14 +143,78 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             
             
             mapView.camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
-            request(coordinates: location.coordinate)
+            print("SCREEEEEEEEEAM")
+            if isStationAvailable {
+                //print("Station is available")
+                stationDataRequest(coordinates: location.coordinate)
+            } else {
+                request(coordinates: location.coordinate)
+            }
             
             /*self.myLocationMarker.position = location.coordinate
             self.myLocationMarker.map = mapView*/
             
             locationManager.stopUpdatingLocation()
+        } else {
+            
         }
         
+    }
+    
+    func stationDataRequest(coordinates:CLLocationCoordinate2D) {
+        
+        var weatherData:[String:Any]!
+        let urlString = "http://weatherstation.local:8080/lastmeasure"
+        
+        var request = URLRequest(url: URL(string: urlString)!)
+        
+        request.httpMethod = "GET"
+        //var session = URLSession.shared
+        
+        let urlconfig = URLSessionConfiguration.default
+        urlconfig.timeoutIntervalForRequest = 8
+        urlconfig.timeoutIntervalForResource = 8
+        let session = URLSession(configuration: urlconfig, delegate: self as? URLSessionDelegate, delegateQueue: nil)
+        
+        session.dataTask(with: request) {data, response, error in
+            guard error == nil else {
+                //print(error!)
+                print("ERROR!!!!")
+                self.isStationAvailable = false
+                self.request(coordinates: coordinates)
+                return
+            }
+            guard let data = data else {
+                print("Data is empty")
+                return
+            }
+            
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data) as! [Any]
+                guard let datos = json.first as? [String:Any] else {return}
+                print(datos["temperature"])
+                weatherData = datos
+            } catch {
+                print(error)
+            }
+            
+            DispatchQueue.main.async(execute: {
+                
+                self.weatherCode = 800
+                self.weatherText = "--"
+                
+                let celsius = weatherData["temperature"]!
+                
+                let pressure = weatherData["pressure"]!
+                let doubleStr = "\(pressure)" // "3.14"
+                self.temperature.temp = "\(celsius)ºC"
+                
+                self.pressureText = "\(doubleStr) hPa"
+                self.humidityText = "\(weatherData["humidity"]!)%"
+            })
+            
+            }.resume()
     }
     
     func request (coordinates:CLLocationCoordinate2D) {
@@ -228,5 +300,4 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             }.resume()
         
     }
-
 }
