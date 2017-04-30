@@ -22,6 +22,7 @@
 		48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A7485B1E6BBA13001475C1 /* myLocation.png */; };
 		48C54DE31E89CF1C00C74AAD /* tempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C54DE21E89CF1C00C74AAD /* tempView.swift */; };
 		48F869B21EA9973B00F6CE0F /* aux.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 48F869B11EA9973B00F6CE0F /* aux.gpx */; };
+		48FBACD91EB58990003BA735 /* DestinationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBACD81EB58990003BA735 /* DestinationWeatherView.swift */; };
 		BADC57EE203BC8637AA38C3B /* libPods-gMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EF4F1B2B3B291CFCFAB46 /* libPods-gMaps.a */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		48A7485B1E6BBA13001475C1 /* myLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLocation.png; sourceTree = "<group>"; };
 		48C54DE21E89CF1C00C74AAD /* tempView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tempView.swift; sourceTree = "<group>"; };
 		48F869B11EA9973B00F6CE0F /* aux.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = aux.gpx; sourceTree = "<group>"; };
+		48FBACD81EB58990003BA735 /* DestinationWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationWeatherView.swift; sourceTree = "<group>"; };
 		9E3EF4F1B2B3B291CFCFAB46 /* libPods-gMaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gMaps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7DD4BEF7053DD35E0A81E7 /* Pods-gMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gMaps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gMaps/Pods-gMaps.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				4898D8B81E5FB80600FF29EB /* AppDelegate.swift */,
 				4898D8BA1E5FB80600FF29EB /* ViewController.swift */,
 				48C54DE21E89CF1C00C74AAD /* tempView.swift */,
+				48FBACD81EB58990003BA735 /* DestinationWeatherView.swift */,
 				48F869B11EA9973B00F6CE0F /* aux.gpx */,
 				48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */,
 				4898D8BC1E5FB80600FF29EB /* Main.storyboard */,
@@ -254,6 +257,7 @@
 				4898D8B91E5FB80600FF29EB /* AppDelegate.swift in Sources */,
 				48C54DE31E89CF1C00C74AAD /* tempView.swift in Sources */,
 				48886D331E8AF1F6005AC1D8 /* PopupViewController.swift in Sources */,
+				48FBACD91EB58990003BA735 /* DestinationWeatherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
