@@ -28,7 +28,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var locationName = "Medellín, Antioquia" {
+    @IBInspectable var locationName = "Medellín, Antioquia, Medellín" {
         didSet {
             setNeedsDisplay()
         }
@@ -90,11 +90,11 @@ import UIKit
     }
     
     override func layoutSubviews() {
-        locationLabel.frame = CGRect(x: 2, y: 0, width: bounds.size.width/2, height: bounds.size.height/4)
+        locationLabel.frame = CGRect(x: 2, y: 0, width: bounds.size.width/1.08, height: bounds.size.height/4)
         temperatureLabel.frame = CGRect(x: 2, y: bounds.size.height/4, width: bounds.size.width/2, height: bounds.size.height/4)
         humidityLabel.frame = CGRect(x: 2, y: (bounds.size.height/4)*2, width: bounds.size.width/2, height: bounds.size.height/4)
         pressureLabel.frame = CGRect(x: 2, y: (bounds.size.height/4)*3, width: (bounds.size.width/2), height: bounds.size.height/4)
-        closeButton.frame = CGRect(x: (bounds.size.width-20), y: 2, width: 20, height: 20)
+        closeButton.frame = CGRect(x: (bounds.size.width-22), y: 2, width: 20, height: 20)
     }
     
     /*

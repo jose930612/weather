@@ -8,7 +8,7 @@
 
 import UIKit
 
-let π:CGFloat = CGFloat(M_PI)
+let π:CGFloat = CGFloat(Double.pi)
 let NoOfGlasses = 8
 
 @IBDesignable class tempView: UIView {
@@ -16,6 +16,8 @@ let NoOfGlasses = 8
     @IBInspectable var counter: Int = 5
     let detailPopup = UIButton()
     let refreshButton = UIButton()
+    let settingButton = UIButton()
+    let routeButton = UIButton()
     
     @IBInspectable var counterColor: UIColor = UIColor(red:0.26, green:0.52, blue:0.96, alpha:1.0)
     
@@ -94,6 +96,38 @@ let NoOfGlasses = 8
         temp.draw(in: CGRect(x:(self.bounds.width/2)-(120/2), y:(self.bounds.height/2)-(fontSize/1.6), width:120.0, height:fontSize), withAttributes: attributes as? [String : Any])
         
         
+        
+        
+        //routeButton.setTitle("R", for: .normal)
+        routeButton.setImage(UIImage(named: "drive.png"), for: .normal)
+        //routeButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        //routeButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        routeButton.backgroundColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0)
+        routeButton.layer.cornerRadius = 10
+        //detailPopup.layer.borderColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).cgColor
+        //detailPopup.layer.borderWidth = 2
+        
+        routeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+        addSubview(routeButton)
+        
+        routeButton.frame = CGRect(x: (bounds.size.width-20), y: (bounds.size.height/2)-10, width: 20, height: 20)
+        
+        
+        //settingButton.setTitle("I", for: .normal)
+        settingButton.setImage(UIImage(named: "settings.png"), for: .normal)
+        //settingButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        //settingButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        settingButton.backgroundColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0)
+        settingButton.layer.cornerRadius = 10
+        //detailPopup.layer.borderColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).cgColor
+        //detailPopup.layer.borderWidth = 2
+        
+        settingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+        addSubview(settingButton)
+        
+        settingButton.frame = CGRect(x: (bounds.size.width/2)-10, y: (bounds.size.height)-20, width: 20, height: 20)
+        
+        
         //detailPopup.setTitle("I", for: .normal)
         detailPopup.setImage(UIImage(named: "info.png"), for: .normal)
         //detailPopup.setTitleColor(UIColor.black, for: UIControlState.normal)
@@ -160,6 +194,8 @@ let NoOfGlasses = 8
         self.shrink = 8.0
         self.detailPopup.isHidden = false
         self.refreshButton.isHidden = false
+        self.settingButton.isHidden = false
+        self.routeButton.isHidden = false
         self.fontSize = 20
     }
     
@@ -196,6 +232,8 @@ let NoOfGlasses = 8
         self.shrink = 0.0
         self.detailPopup.isHidden = true
         self.refreshButton.isHidden = true
+        self.settingButton.isHidden = true
+        self.routeButton.isHidden = true
         self.fontSize = 15
     }
     

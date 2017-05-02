@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480DF1CD1EB6B30900B71488 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 480DF1CC1EB6B30900B71488 /* GoogleService-Info.plist */; };
 		48267DC91E8C84DD00337499 /* cloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DC81E8C84DD00337499 /* cloudy.png */; };
 		48267DCD1E8C888300337499 /* sunny.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DCC1E8C888300337499 /* sunny.png */; };
 		48267DCF1E8C8CF300337499 /* rainy.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DCE1E8C8CF300337499 /* rainy.png */; };
-		48267DD31E8C972D00337499 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DD21E8C972D00337499 /* refresh.png */; };
-		48267DD51E8C98DA00337499 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DD41E8C98DA00337499 /* info.png */; };
 		48886D331E8AF1F6005AC1D8 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */; };
 		4898D8B91E5FB80600FF29EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898D8B81E5FB80600FF29EB /* AppDelegate.swift */; };
 		4898D8BB1E5FB80600FF29EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898D8BA1E5FB80600FF29EB /* ViewController.swift */; };
@@ -20,19 +19,23 @@
 		4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8C11E5FB80600FF29EB /* LaunchScreen.storyboard */; };
 		4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8CA1E5FB8DF00FF29EB /* Podfile */; };
 		48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A7485B1E6BBA13001475C1 /* myLocation.png */; };
+		48B2D9291EB8293600889CF8 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D9281EB8293600889CF8 /* settings.png */; };
+		48B2D92B1EB8296600889CF8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92A1EB8296600889CF8 /* refresh.png */; };
+		48B2D92D1EB829CE00889CF8 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92C1EB829CE00889CF8 /* info.png */; };
+		48B39B181EB6DA2900175A9A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B39B171EB6DA2900175A9A /* LoginViewController.swift */; };
+		48B39B1A1EB6DACE00175A9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B39B191EB6DACE00175A9A /* SettingsViewController.swift */; };
+		48B39B221EB6F2D400175A9A /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B39B211EB6F2D400175A9A /* drive.png */; };
 		48C54DE31E89CF1C00C74AAD /* tempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C54DE21E89CF1C00C74AAD /* tempView.swift */; };
-		48F869B21EA9973B00F6CE0F /* aux.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 48F869B11EA9973B00F6CE0F /* aux.gpx */; };
 		48FBACD91EB58990003BA735 /* DestinationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBACD81EB58990003BA735 /* DestinationWeatherView.swift */; };
 		BADC57EE203BC8637AA38C3B /* libPods-gMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EF4F1B2B3B291CFCFAB46 /* libPods-gMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		08A6E76F65176ACB74403024 /* Pods-gMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gMaps.release.xcconfig"; path = "Pods/Target Support Files/Pods-gMaps/Pods-gMaps.release.xcconfig"; sourceTree = "<group>"; };
+		480DF1CC1EB6B30900B71488 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		48267DC81E8C84DD00337499 /* cloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudy.png; sourceTree = "<group>"; };
 		48267DCC1E8C888300337499 /* sunny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunny.png; sourceTree = "<group>"; };
 		48267DCE1E8C8CF300337499 /* rainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainy.png; sourceTree = "<group>"; };
-		48267DD21E8C972D00337499 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		48267DD41E8C98DA00337499 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		4898D8B51E5FB80600FF29EB /* gMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4898D8B81E5FB80600FF29EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,8 +46,13 @@
 		4898D8C41E5FB80600FF29EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4898D8CA1E5FB8DF00FF29EB /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		48A7485B1E6BBA13001475C1 /* myLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLocation.png; sourceTree = "<group>"; };
+		48B2D9281EB8293600889CF8 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		48B2D92A1EB8296600889CF8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		48B2D92C1EB829CE00889CF8 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		48B39B171EB6DA2900175A9A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		48B39B191EB6DACE00175A9A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		48B39B211EB6F2D400175A9A /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drive.png; sourceTree = "<group>"; };
 		48C54DE21E89CF1C00C74AAD /* tempView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tempView.swift; sourceTree = "<group>"; };
-		48F869B11EA9973B00F6CE0F /* aux.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = aux.gpx; sourceTree = "<group>"; };
 		48FBACD81EB58990003BA735 /* DestinationWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationWeatherView.swift; sourceTree = "<group>"; };
 		9E3EF4F1B2B3B291CFCFAB46 /* libPods-gMaps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gMaps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7DD4BEF7053DD35E0A81E7 /* Pods-gMaps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gMaps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gMaps/Pods-gMaps.debug.xcconfig"; sourceTree = "<group>"; };
@@ -97,18 +105,22 @@
 				4898D8BA1E5FB80600FF29EB /* ViewController.swift */,
 				48C54DE21E89CF1C00C74AAD /* tempView.swift */,
 				48FBACD81EB58990003BA735 /* DestinationWeatherView.swift */,
-				48F869B11EA9973B00F6CE0F /* aux.gpx */,
 				48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */,
+				48B39B171EB6DA2900175A9A /* LoginViewController.swift */,
+				48B39B191EB6DACE00175A9A /* SettingsViewController.swift */,
 				4898D8BC1E5FB80600FF29EB /* Main.storyboard */,
 				48267DC81E8C84DD00337499 /* cloudy.png */,
 				48267DCC1E8C888300337499 /* sunny.png */,
-				48267DD21E8C972D00337499 /* refresh.png */,
-				48267DD41E8C98DA00337499 /* info.png */,
+				48B2D9281EB8293600889CF8 /* settings.png */,
+				48B2D92A1EB8296600889CF8 /* refresh.png */,
+				48B39B211EB6F2D400175A9A /* drive.png */,
+				48B2D92C1EB829CE00889CF8 /* info.png */,
 				48267DCE1E8C8CF300337499 /* rainy.png */,
 				48A7485B1E6BBA13001475C1 /* myLocation.png */,
 				4898D8BF1E5FB80600FF29EB /* Assets.xcassets */,
 				4898D8C11E5FB80600FF29EB /* LaunchScreen.storyboard */,
 				4898D8C41E5FB80600FF29EB /* Info.plist */,
+				480DF1CC1EB6B30900B71488 /* GoogleService-Info.plist */,
 			);
 			path = gMaps;
 			sourceTree = "<group>";
@@ -184,13 +196,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F869B21EA9973B00F6CE0F /* aux.gpx in Resources */,
 				48267DCF1E8C8CF300337499 /* rainy.png in Resources */,
+				48B2D92B1EB8296600889CF8 /* refresh.png in Resources */,
 				4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */,
+				48B39B221EB6F2D400175A9A /* drive.png in Resources */,
 				48267DC91E8C84DD00337499 /* cloudy.png in Resources */,
+				48B2D9291EB8293600889CF8 /* settings.png in Resources */,
 				4898D8C01E5FB80600FF29EB /* Assets.xcassets in Resources */,
-				48267DD51E8C98DA00337499 /* info.png in Resources */,
-				48267DD31E8C972D00337499 /* refresh.png in Resources */,
+				48B2D92D1EB829CE00889CF8 /* info.png in Resources */,
+				480DF1CD1EB6B30900B71488 /* GoogleService-Info.plist in Resources */,
 				48267DCD1E8C888300337499 /* sunny.png in Resources */,
 				48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */,
 				4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */,
@@ -253,7 +267,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B39B181EB6DA2900175A9A /* LoginViewController.swift in Sources */,
 				4898D8BB1E5FB80600FF29EB /* ViewController.swift in Sources */,
+				48B39B1A1EB6DACE00175A9A /* SettingsViewController.swift in Sources */,
 				4898D8B91E5FB80600FF29EB /* AppDelegate.swift in Sources */,
 				48C54DE31E89CF1C00C74AAD /* tempView.swift in Sources */,
 				48886D331E8AF1F6005AC1D8 /* PopupViewController.swift in Sources */,

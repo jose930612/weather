@@ -10,7 +10,18 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
+extension String
+{
+    func replace(target: String, withString: String) -> String
+    {
+        return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
+    }
+}
+
 class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
+    
+    
+    let screenSize = UIScreen.main.bounds
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var destinationWeatherView: DestinationWeatherView!
@@ -28,7 +39,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     var imgIconUrl:URL!
     var isStationAvailable = true
     
-    let RESIZE_FACTOR = CGFloat(80.0)
+    let RESIZE_FACTOR = CGFloat(100.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +55,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
         self.temperature.detailPopup.isHidden = true
         self.temperature.refreshButton.isHidden = true
+        self.temperature.settingButton.isHidden = true
+        self.temperature.routeButton.isHidden = true
         self.destinationWeatherView.isHidden = true
         
         
@@ -110,15 +123,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
         howsTheWeatherThere(placeName: place.name, coordinate: place.coordinate)
         
-        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: (self.mapView.frame.height-RESIZE_FACTOR))
+        //print(self.screenSize.height)
+        
+        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: (self.screenSize.height-RESIZE_FACTOR))
         
         self.dismiss(animated: true, completion: nil) // dismiss after select place
         
     }
     
     func howsTheWeatherThere(placeName:String, coordinate:CLLocationCoordinate2D ) {
+        destinationReverseGeocodeCoordinate(placeName: placeName, coordinate: coordinate)
+        
         self.destinationWeatherView.isHidden = false
-        self.destinationWeatherView.locationLabel.text = placeName
+        
         destinationRequest (coordinates:coordinate)
     }
     
@@ -144,13 +161,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             mapView.mapType = GoogleMaps.kGMSTypeNormal
             mapView.settings.myLocationButton = true
             mapView.accessibilityElementsHidden = false
+            
         }
     }
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            
             
             mapView.camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
             //print("SCREEEEEEEEEAM")
@@ -303,7 +320,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                 let doubleStr = String(format: "%.2f", pressure) // "3.14"
                 self.temperature.temp = "\(NSNumber(value: celsius))ºC"
                 
-                self.pressureText = "\(doubleStr) Atm"
+                self.pressureText = "\(hPa) hPa"
                 self.humidityText = "\(NSNumber(value: (results["main"]?["humidity"]) as! Double))%"
             })
             
@@ -313,7 +330,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     func closeWeatherDetails(){
         self.destinationWeatherView.isHidden = true
-        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: (self.mapView.frame.height+(RESIZE_FACTOR+20)))
+        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: self.screenSize.height)
         self.mapView.clear()
         mapView.camera = GMSCameraPosition.camera(withLatitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!, zoom: 17)
     }
@@ -371,5 +388,97 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             
             }.resume()
         
+    }
+    
+    func drawRoute(originName:[String], destinationName:[String]) {
+        
+        let originFirst = originName.first?.replace(target:" ", withString:"+").replace(target:"#", withString:"")
+        let originLast = originName.last?.replace(target:" ", withString:"+")
+        //print("Origin: \((originFirst)!)+\((originLast)!)")
+        let originString = "\((originFirst)!)+\((originLast)!)"
+        
+        let destinationFirst = destinationName.first?.replace(target:" ", withString:"+").replace(target:"#", withString:"")
+        let destinationLast = destinationName.last?.replace(target:" ", withString:"+")
+        //print("Destination: \((destinationFirst)!)+\((destinationLast)!)")
+        let destinationString = "\((destinationFirst)!)+\((destinationLast)!)"
+        
+        var directionsURLString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(originString)&destination=\(destinationString)&travel_mode=driving&key=AIzaSyCURYbqKNf1E9oizVol7flWmxB0Rt5b-PA"
+        //print(directionsURLString)
+        
+        directionsURLString = directionsURLString.addingPercentEscapes(using: String.Encoding.utf8)!
+        let directionsURL = NSURL(string: directionsURLString)
+        
+        DispatchQueue.main.async(execute: {
+            let directionsData = NSData(contentsOf: directionsURL! as URL)
+            do {
+                let json = try JSONSerialization.jsonObject(with: directionsData as! Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, AnyObject>
+                
+                let status = json["status"] as! String
+                
+                if status == "OK" {
+                    var routes = (json["routes"] as! Array<Dictionary<String, AnyObject>>)[0]
+                    //let overviewPolyline = routes["overview_polyline"] as! Dictionary<String, AnyObject>
+                    let legs = routes["legs"] as! Array<Dictionary<String, AnyObject>>
+                    
+                    let steps = legs[0]["steps"] as! Array<Dictionary<String, AnyObject>>
+                    
+                    for step in steps {
+                        //print(step["polyline"]?["points"])
+                        let route = step["polyline"]?["points"] as! String
+                        
+                        let path: GMSPath = GMSPath(fromEncodedPath: route)!
+                        let routePolyline = GMSPolyline(path: path)
+                        routePolyline.map = self.mapView
+                        routePolyline.strokeColor = UIColor(red: 44/255, green: 134/255, blue: 200/255, alpha:1)
+                        routePolyline.strokeWidth = 4.0
+                        
+                    }
+                    /*
+                     let route = overviewPolyline["points"] as! String
+                     
+                     let path: GMSPath = GMSPath(fromEncodedPath: route)!
+                     let routePolyline = GMSPolyline(path: path)
+                     routePolyline.map = self.mapView
+                     routePolyline.strokeColor = UIColor(red: 44/255, green: 134/255, blue: 200/255, alpha:1)
+                     routePolyline.strokeWidth = 3.0
+                     */
+                }
+                
+            } catch {
+                print("catch")
+            }
+        })
+    }
+    
+    func destinationReverseGeocodeCoordinate(placeName: String, coordinate: CLLocationCoordinate2D) {
+        
+        // 1
+        let geocoder = GMSGeocoder()
+        // 2
+        geocoder.reverseGeocodeCoordinate(coordinate){ response, error in
+            if let address = response?.firstResult() {
+                let responseString = address.lines as! [String]
+                //print(responseString)
+                
+                self.originReverseGeocodeCoordinate(destinationName: responseString)
+                
+                self.destinationWeatherView.locationLabel.text = "\(placeName), \((responseString.last)!)"
+            }
+        }
+    }
+    
+    func originReverseGeocodeCoordinate(destinationName: [String]) {
+        
+        // 1
+        let geocoder = GMSGeocoder()
+        // 2
+        geocoder.reverseGeocodeCoordinate((locationManager.location?.coordinate)!){ response, error in
+            if let address = response?.firstResult() {
+                let responseString = address.lines as! [String]
+                //print(responseString)
+                self.drawRoute(originName:(responseString), destinationName:(destinationName))
+                
+            }
+        }
     }
 }
