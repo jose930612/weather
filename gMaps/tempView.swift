@@ -33,7 +33,7 @@ let NoOfGlasses = 8
         }
     }
     
-    @IBInspectable var radius:CGFloat = max(55.0, 55.0) {
+    @IBInspectable var radius:CGFloat = max(72.0, 72.0) {
         didSet {
             setNeedsDisplay()
         }
@@ -110,7 +110,7 @@ let NoOfGlasses = 8
         routeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         addSubview(routeButton)
         
-        routeButton.frame = CGRect(x: (bounds.size.width-20), y: (bounds.size.height/2)-10, width: 20, height: 20)
+        routeButton.frame = CGRect(x: (bounds.size.width-32), y: (bounds.size.height/2)-16, width: 32, height: 32)
         
         
         //settingButton.setTitle("I", for: .normal)
@@ -125,7 +125,7 @@ let NoOfGlasses = 8
         settingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         addSubview(settingButton)
         
-        settingButton.frame = CGRect(x: (bounds.size.width/2)-10, y: (bounds.size.height)-20, width: 20, height: 20)
+        settingButton.frame = CGRect(x: (bounds.size.width/2)-16, y: (bounds.size.height)-32, width: 32, height: 32)
         
         
         //detailPopup.setTitle("I", for: .normal)
@@ -140,7 +140,7 @@ let NoOfGlasses = 8
         detailPopup.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         addSubview(detailPopup)
         
-        detailPopup.frame = CGRect(x: (bounds.size.width/2)-10, y: 0, width: 20, height: 20)
+        detailPopup.frame = CGRect(x: (bounds.size.width/2)-16, y: 0, width: 32, height: 32)
         
         
         
@@ -156,23 +156,23 @@ let NoOfGlasses = 8
         refreshButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         addSubview(refreshButton)
         
-        refreshButton.frame = CGRect(x: 0, y: (bounds.size.height/2)-10, width: 20, height: 20)
+        refreshButton.frame = CGRect(x: 0, y: (bounds.size.height/2)-16, width: 32, height: 32)
         
         let refPath = UIBezierPath()
         
-        refPath.move(to: CGPoint(x: 27, y: bounds.size.height/2))
+        refPath.move(to: CGPoint(x: 35, y: bounds.size.height/2))
         
         refPath.addLine(to: CGPoint(x: (bounds.size.width/2)-(20+shrink), y: bounds.size.height/2))
         
-        refPath.move(to: CGPoint(x: bounds.size.width-27, y: bounds.size.height/2))
+        refPath.move(to: CGPoint(x: bounds.size.width-35, y: bounds.size.height/2))
         
         refPath.addLine(to: CGPoint(x: (bounds.size.width/2)+(20+shrink), y: bounds.size.height/2))
         
-        refPath.move(to: CGPoint(x: bounds.size.width/2, y: bounds.size.height-27))
+        refPath.move(to: CGPoint(x: bounds.size.width/2, y: bounds.size.height-35))
         
         refPath.addLine(to: CGPoint(x: bounds.size.width/2, y: (bounds.size.height/2)+(15+shrink)))
         
-        refPath.move(to: CGPoint(x: bounds.size.width/2, y: 27))
+        refPath.move(to: CGPoint(x: bounds.size.width/2, y: 35))
         
         refPath.addLine(to: CGPoint(x: bounds.size.width/2, y: (bounds.size.height/2)-(15+shrink)))
         
@@ -190,13 +190,13 @@ let NoOfGlasses = 8
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.radius = max(70.0, 70.0)
-        self.shrink = 8.0
+        self.radius = max(90.0, 90.0)
+        self.shrink = 16.0
         self.detailPopup.isHidden = false
         self.refreshButton.isHidden = false
         self.settingButton.isHidden = false
         self.routeButton.isHidden = false
-        self.fontSize = 20
+        self.fontSize = 22
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -228,7 +228,7 @@ let NoOfGlasses = 8
                 self.refreshButton.sendActions(for: .touchUpInside)
             }
         }
-        self.radius = max(55.0, 55.0)
+        self.radius = max(72.0, 72.0)
         self.shrink = 0.0
         self.detailPopup.isHidden = true
         self.refreshButton.isHidden = true

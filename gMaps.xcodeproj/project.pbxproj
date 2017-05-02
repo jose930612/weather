@@ -22,6 +22,7 @@
 		48B2D9291EB8293600889CF8 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D9281EB8293600889CF8 /* settings.png */; };
 		48B2D92B1EB8296600889CF8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92A1EB8296600889CF8 /* refresh.png */; };
 		48B2D92D1EB829CE00889CF8 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92C1EB829CE00889CF8 /* info.png */; };
+		48B2D9311EB83A2100889CF8 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D9301EB83A2100889CF8 /* search.png */; };
 		48B39B181EB6DA2900175A9A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B39B171EB6DA2900175A9A /* LoginViewController.swift */; };
 		48B39B1A1EB6DACE00175A9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B39B191EB6DACE00175A9A /* SettingsViewController.swift */; };
 		48B39B221EB6F2D400175A9A /* drive.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B39B211EB6F2D400175A9A /* drive.png */; };
@@ -49,6 +50,7 @@
 		48B2D9281EB8293600889CF8 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		48B2D92A1EB8296600889CF8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		48B2D92C1EB829CE00889CF8 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		48B2D9301EB83A2100889CF8 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		48B39B171EB6DA2900175A9A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		48B39B191EB6DACE00175A9A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48B39B211EB6F2D400175A9A /* drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drive.png; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				4898D8BC1E5FB80600FF29EB /* Main.storyboard */,
 				48267DC81E8C84DD00337499 /* cloudy.png */,
 				48267DCC1E8C888300337499 /* sunny.png */,
+				48B2D9301EB83A2100889CF8 /* search.png */,
 				48B2D9281EB8293600889CF8 /* settings.png */,
 				48B2D92A1EB8296600889CF8 /* refresh.png */,
 				48B39B211EB6F2D400175A9A /* drive.png */,
@@ -208,6 +211,7 @@
 				48267DCD1E8C888300337499 /* sunny.png in Resources */,
 				48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */,
 				4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */,
+				48B2D9311EB83A2100889CF8 /* search.png in Resources */,
 				4898D8BE1E5FB80600FF29EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
