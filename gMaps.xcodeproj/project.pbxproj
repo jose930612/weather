@@ -15,10 +15,13 @@
 		4898D8B91E5FB80600FF29EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898D8B81E5FB80600FF29EB /* AppDelegate.swift */; };
 		4898D8BB1E5FB80600FF29EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898D8BA1E5FB80600FF29EB /* ViewController.swift */; };
 		4898D8BE1E5FB80600FF29EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8BC1E5FB80600FF29EB /* Main.storyboard */; };
-		4898D8C01E5FB80600FF29EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8BF1E5FB80600FF29EB /* Assets.xcassets */; };
 		4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8C11E5FB80600FF29EB /* LaunchScreen.storyboard */; };
 		4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8CA1E5FB8DF00FF29EB /* Podfile */; };
 		48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A7485B1E6BBA13001475C1 /* myLocation.png */; };
+		48A9B0791EBA3B0C00A357D9 /* coffe.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A9B0781EBA3B0C00A357D9 /* coffe.png */; };
+		48A9B07B1EBCCFC700A357D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A9B07A1EBCCFC700A357D9 /* Assets.xcassets */; };
+		48A9B07D1EBE77EF00A357D9 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9B07C1EBE77EF00A357D9 /* PlacesTableViewController.swift */; };
+		48A9B0801EBE803100A357D9 /* PlacesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48A9B07E1EBE803100A357D9 /* PlacesModel.xcdatamodeld */; };
 		48B2D9291EB8293600889CF8 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D9281EB8293600889CF8 /* settings.png */; };
 		48B2D92B1EB8296600889CF8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92A1EB8296600889CF8 /* refresh.png */; };
 		48B2D92D1EB829CE00889CF8 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92C1EB829CE00889CF8 /* info.png */; };
@@ -42,11 +45,14 @@
 		4898D8B81E5FB80600FF29EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4898D8BA1E5FB80600FF29EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4898D8BD1E5FB80600FF29EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4898D8BF1E5FB80600FF29EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4898D8C21E5FB80600FF29EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4898D8C41E5FB80600FF29EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4898D8CA1E5FB8DF00FF29EB /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		48A7485B1E6BBA13001475C1 /* myLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLocation.png; sourceTree = "<group>"; };
+		48A9B0781EBA3B0C00A357D9 /* coffe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffe.png; sourceTree = "<group>"; };
+		48A9B07A1EBCCFC700A357D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		48A9B07C1EBE77EF00A357D9 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
+		48A9B07F1EBE803100A357D9 /* PlacesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlacesModel.xcdatamodel; sourceTree = "<group>"; };
 		48B2D9281EB8293600889CF8 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		48B2D92A1EB8296600889CF8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		48B2D92C1EB829CE00889CF8 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
@@ -110,20 +116,23 @@
 				48886D321E8AF1F6005AC1D8 /* PopupViewController.swift */,
 				48B39B171EB6DA2900175A9A /* LoginViewController.swift */,
 				48B39B191EB6DACE00175A9A /* SettingsViewController.swift */,
+				48A9B07C1EBE77EF00A357D9 /* PlacesTableViewController.swift */,
 				4898D8BC1E5FB80600FF29EB /* Main.storyboard */,
 				48267DC81E8C84DD00337499 /* cloudy.png */,
 				48267DCC1E8C888300337499 /* sunny.png */,
 				48B2D9301EB83A2100889CF8 /* search.png */,
+				48A9B07A1EBCCFC700A357D9 /* Assets.xcassets */,
 				48B2D9281EB8293600889CF8 /* settings.png */,
 				48B2D92A1EB8296600889CF8 /* refresh.png */,
+				48A9B0781EBA3B0C00A357D9 /* coffe.png */,
 				48B39B211EB6F2D400175A9A /* drive.png */,
 				48B2D92C1EB829CE00889CF8 /* info.png */,
 				48267DCE1E8C8CF300337499 /* rainy.png */,
 				48A7485B1E6BBA13001475C1 /* myLocation.png */,
-				4898D8BF1E5FB80600FF29EB /* Assets.xcassets */,
 				4898D8C11E5FB80600FF29EB /* LaunchScreen.storyboard */,
 				4898D8C41E5FB80600FF29EB /* Info.plist */,
 				480DF1CC1EB6B30900B71488 /* GoogleService-Info.plist */,
+				48A9B07E1EBE803100A357D9 /* PlacesModel.xcdatamodeld */,
 			);
 			path = gMaps;
 			sourceTree = "<group>";
@@ -202,10 +211,11 @@
 				48267DCF1E8C8CF300337499 /* rainy.png in Resources */,
 				48B2D92B1EB8296600889CF8 /* refresh.png in Resources */,
 				4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */,
+				48A9B0791EBA3B0C00A357D9 /* coffe.png in Resources */,
+				48A9B07B1EBCCFC700A357D9 /* Assets.xcassets in Resources */,
 				48B39B221EB6F2D400175A9A /* drive.png in Resources */,
 				48267DC91E8C84DD00337499 /* cloudy.png in Resources */,
 				48B2D9291EB8293600889CF8 /* settings.png in Resources */,
-				4898D8C01E5FB80600FF29EB /* Assets.xcassets in Resources */,
 				48B2D92D1EB829CE00889CF8 /* info.png in Resources */,
 				480DF1CD1EB6B30900B71488 /* GoogleService-Info.plist in Resources */,
 				48267DCD1E8C888300337499 /* sunny.png in Resources */,
@@ -271,7 +281,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48A9B0801EBE803100A357D9 /* PlacesModel.xcdatamodeld in Sources */,
 				48B39B181EB6DA2900175A9A /* LoginViewController.swift in Sources */,
+				48A9B07D1EBE77EF00A357D9 /* PlacesTableViewController.swift in Sources */,
 				4898D8BB1E5FB80600FF29EB /* ViewController.swift in Sources */,
 				48B39B1A1EB6DACE00175A9A /* SettingsViewController.swift in Sources */,
 				4898D8B91E5FB80600FF29EB /* AppDelegate.swift in Sources */,
@@ -444,6 +456,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		48A9B07E1EBE803100A357D9 /* PlacesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				48A9B07F1EBE803100A357D9 /* PlacesModel.xcdatamodel */,
+			);
+			currentVersion = 48A9B07F1EBE803100A357D9 /* PlacesModel.xcdatamodel */;
+			path = PlacesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4898D8AD1E5FB80500FF29EB /* Project object */;
 }
