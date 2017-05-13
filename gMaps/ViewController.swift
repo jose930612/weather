@@ -124,13 +124,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        //print("Hola")
+    }
+    
     func updateWeather() {
         if isStationAvailable {
             print("stationDataRequest")
             stationDataRequest(coordinates: (locationManager.location?.coordinate)!)
         } else {
             print("request")
-            isNearbyCalled = false
+            self.isNearbyCalled = false
             request(coordinates: (locationManager.location?.coordinate)!)
         }
     }
@@ -147,17 +151,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         self.popOverVC.pressureInfo.text = self.pressureText
         self.popOverVC.weatherInfo.text = self.weatherText
         
+        
         var imgName:String!
         
-        if weatherCode == 800 {
+        if self.weatherCode == 800 {
             imgName="sunny"
         }
         
-        if weatherCode > 800 && weatherCode < 900 {
+        if (self.weatherCode > 800 && weatherCode < 900) || (self.weatherCode > 700 && self.weatherCode < 800) {
             imgName="cloudy"
         }
         
-        if (weatherCode >= 900 && weatherCode < 1000) || (weatherCode >= 500 && weatherCode < 600) || (weatherCode >= 200 && weatherCode < 400) {
+        if (self.weatherCode >= 900 && self.weatherCode < 1000) || (self.weatherCode >= 500 && self.weatherCode < 600) || (self.weatherCode >= 200 && self.weatherCode < 400) {
             imgName="rainy"
         }
         
@@ -327,6 +332,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             
             let results:Dictionary<String, AnyObject>! = json
             
+            //print(results)
+            
             
             DispatchQueue.main.async(execute: {
                 
@@ -334,16 +341,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                     //print(weather[0]["description"]!) // the value is an optional.
                     
                     self.weatherCode = NumberFormatter().number(from: "\(weather[0]["id"]!)") as! Int!
-                    //print(weather[0])
-                    if self.isNearbyCalled == false {
-                        self.isNearbyCalled = true
-                        self.myNearByPlaces(coordinates: coordinates, weathercode:self.weatherCode)
-                    }
-                    
                     
                     self.weatherText = "\(weather[0]["description"]!)"
                     
                     let weatherIcon = "\(weather[0]["icon"]!)"
+                    
+                    //print(weather[0])
+                    //print("\(self.weatherCode)")
+                    if self.isNearbyCalled == false {
+                        self.isNearbyCalled = true
+                        self.setPlacesInMap(coordinates: coordinates, weathercode:self.weatherCode)
+                    }
                     
                     self.imgIconUrl  = URL(string: "http://openweathermap.org/img/w/\(weatherIcon).png")
                     
@@ -547,38 +555,35 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         }
     }
     
-    func myNearByPlaces(coordinates:CLLocationCoordinate2D, weathercode:Int) {
+    func setPlacesInMap(coordinates:CLLocationCoordinate2D, weathercode:Int){
         
         var places = [String]()
         
-        if weatherCode == 800 {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Place_type")
+        
+        if self.weatherCode == 800 {
             places = weatherPlaces["sunny"]!
         }
         
-        if weatherCode > 800 && weatherCode < 900 {
+        if (self.weatherCode > 800 && self.weatherCode < 900) || (self.weatherCode > 700 && self.weatherCode < 800) {
             places = weatherPlaces["cloudy"]!
         }
         
-        if (weatherCode >= 900 && weatherCode < 1000) || (weatherCode >= 500 && weatherCode < 600) || (weatherCode >= 200 && weatherCode < 400) {
+        if (self.weatherCode >= 900 && self.weatherCode < 1000) || (self.weatherCode >= 500 && self.weatherCode < 600) || (self.weatherCode >= 200 && self.weatherCode < 400) {
             places = weatherPlaces["rainy"]!
         }
         
-        for placeType in places {
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
-            
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Place_type")
-            
-            request.returnsObjectsAsFaults = false
-            
+        for place in places {
             do {
                 let results = try context.fetch(request)
                 
                 if results.count > 0 {
                     for result in results as! [NSManagedObject] {
                         
-                        if (result.value(forKey: "type") as! String) == placeType {
+                        if (result.value(forKey: "type") as! String) == place {
                             result.setValue(true, forKey: "isSelected")
                             //print(placeType)
                         }
@@ -590,46 +595,97 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             } catch {
                 print("Couldn't fetch results")
             }
-            
-            var placesURLString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(coordinates.latitude),\(coordinates.longitude)&radius=1000&type=\(placeType)&key=AIzaSyCURYbqKNf1E9oizVol7flWmxB0Rt5b-PA"
-            
-            placesURLString = placesURLString.addingPercentEscapes(using: String.Encoding.utf8)!
-            let placesURL = NSURL(string: placesURLString)
-            
-            DispatchQueue.main.async(execute: {
-                let placesData = NSData(contentsOf: placesURL! as URL)
-                do {
-                    let json = try JSONSerialization.jsonObject(with: placesData as! Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, AnyObject>
-                    
-                    let status = json["status"] as! String
-                    self.placesMarkers["\(placeType)"] = [GMSMarker]()
-                    if status == "OK" {
-                        let results = (json["results"] as! Array<Dictionary<String, AnyObject>>)
-                        
-                        for place in results {
-                            let geometry = place["geometry"]?["location"] as! Dictionary<String, AnyObject>
-                            let lat = geometry["lat"]?.doubleValue
-                            let lng = geometry["lng"]?.doubleValue
-                            
-                            let position = CLLocationCoordinate2D(latitude: lat!, longitude: lng!)
-                            let marker = GMSMarker(position: position)
-                            
-                            if placeType == "cafe" {
-                                marker.icon = UIImage(named: "coffe")
-                            }
-                            marker.title = "\(place["name"] as! String)"
-                            self.placesMarkers["\(placeType)"]?.append(marker)
-                            self.placesMarkers["\(placeType)"]?.last?.map = self.mapView
-                            //marker.map = self.mapView
-                        }
-                        //print(self.placesMarkers)
-                    }
-                    
-                } catch {
-                    print("catch")
-                }
-            })
         }
         
+        myNearByPlaces(coordinates:coordinates)
+        
     }
+    
+    func myNearByPlaces(coordinates:CLLocationCoordinate2D) {
+        
+        
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Place_type")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    
+                    if (result.value(forKey: "isSelected") as! Bool) == true {
+                        let placeType = result.value(forKey: "type") as! String
+                        var placesURLString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(coordinates.latitude),\(coordinates.longitude)&radius=1000&type=\(placeType)&key=AIzaSyCURYbqKNf1E9oizVol7flWmxB0Rt5b-PA"
+                        placesURLString = placesURLString.addingPercentEscapes(using: String.Encoding.utf8)!
+                        let placesURL = NSURL(string: placesURLString)
+                        
+                        DispatchQueue.main.async(execute: {
+                            let placesData = NSData(contentsOf: placesURL! as URL)
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: placesData as! Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, AnyObject>
+                                
+                                let status = json["status"] as! String
+                                
+                                
+                                //if self.placesMarkers["\(placeType)"] == nil {
+                                    self.placesMarkers["\(placeType)"] = [GMSMarker]()
+                                //}else{
+                                    //print("DOOOOUGH")
+                                    //self.placesMarkers["\(placeType)"]?.removeAll()
+                                //}
+                                
+                                if status == "OK" {
+                                    let results = (json["results"] as! Array<Dictionary<String, AnyObject>>)
+                                    
+                                    for place in results {
+                                        let geometry = place["geometry"]?["location"] as! Dictionary<String, AnyObject>
+                                        let lat = geometry["lat"]?.doubleValue
+                                        let lng = geometry["lng"]?.doubleValue
+                                        
+                                        let position = CLLocationCoordinate2D(latitude: lat!, longitude: lng!)
+                                        let marker = GMSMarker(position: position)
+                                        
+                                        if placeType == "cafe" {
+                                            marker.icon = UIImage(named: "coffe")
+                                        }
+                                        if placeType == "restaurant" {
+                                            marker.icon = UIImage(named: "restaurant")
+                                        }
+                                        if placeType == "movie_theater" {
+                                            marker.icon = UIImage(named: "movie_theater")
+                                        }
+                                        if placeType == "art_gallery" {
+                                            marker.icon = UIImage(named: "art_gallery")
+                                        }
+                                        if placeType == "shopping_mall" {
+                                            marker.icon = UIImage(named: "shopping_mall")
+                                        }
+                                        marker.title = "\(place["name"] as! String)"
+                                        self.placesMarkers["\(placeType)"]?.append(marker)
+                                        self.placesMarkers["\(placeType)"]?.last?.map = self.mapView
+                                        //marker.map = self.mapView
+                                    }
+                                    //print(self.placesMarkers)
+                                }
+                                
+                            } catch {
+                                print("catch")
+                            }
+                        })
+                    }
+                }
+            } else {
+                print("No results")
+            }
+            
+        } catch {
+            print("Couldn't fetch results")
+        }
+    }
+    
 }

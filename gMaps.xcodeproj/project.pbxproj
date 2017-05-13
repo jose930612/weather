@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		480DF1CD1EB6B30900B71488 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 480DF1CC1EB6B30900B71488 /* GoogleService-Info.plist */; };
+		481E5E5D1EC6ABE000AA47BA /* restaurant.png in Resources */ = {isa = PBXBuildFile; fileRef = 481E5E591EC6ABE000AA47BA /* restaurant.png */; };
+		481E5E5E1EC6ABE000AA47BA /* shopping_mall.png in Resources */ = {isa = PBXBuildFile; fileRef = 481E5E5A1EC6ABE000AA47BA /* shopping_mall.png */; };
+		481E5E5F1EC6ABE000AA47BA /* movie_theater.png in Resources */ = {isa = PBXBuildFile; fileRef = 481E5E5B1EC6ABE000AA47BA /* movie_theater.png */; };
+		481E5E601EC6ABE000AA47BA /* art_gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 481E5E5C1EC6ABE000AA47BA /* art_gallery.png */; };
+		481E5E621EC6ABE600AA47BA /* coffe.png in Resources */ = {isa = PBXBuildFile; fileRef = 481E5E611EC6ABE600AA47BA /* coffe.png */; };
 		48267DC91E8C84DD00337499 /* cloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DC81E8C84DD00337499 /* cloudy.png */; };
 		48267DCD1E8C888300337499 /* sunny.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DCC1E8C888300337499 /* sunny.png */; };
 		48267DCF1E8C8CF300337499 /* rainy.png in Resources */ = {isa = PBXBuildFile; fileRef = 48267DCE1E8C8CF300337499 /* rainy.png */; };
@@ -18,10 +23,10 @@
 		4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8C11E5FB80600FF29EB /* LaunchScreen.storyboard */; };
 		4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4898D8CA1E5FB8DF00FF29EB /* Podfile */; };
 		48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A7485B1E6BBA13001475C1 /* myLocation.png */; };
-		48A9B0791EBA3B0C00A357D9 /* coffe.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A9B0781EBA3B0C00A357D9 /* coffe.png */; };
 		48A9B07B1EBCCFC700A357D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A9B07A1EBCCFC700A357D9 /* Assets.xcassets */; };
 		48A9B07D1EBE77EF00A357D9 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9B07C1EBE77EF00A357D9 /* PlacesTableViewController.swift */; };
 		48A9B0801EBE803100A357D9 /* PlacesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48A9B07E1EBE803100A357D9 /* PlacesModel.xcdatamodeld */; };
+		48A9B08E1EBFF64200A357D9 /* CheckButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9B08D1EBFF64200A357D9 /* CheckButtonView.swift */; };
 		48B2D9291EB8293600889CF8 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D9281EB8293600889CF8 /* settings.png */; };
 		48B2D92B1EB8296600889CF8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92A1EB8296600889CF8 /* refresh.png */; };
 		48B2D92D1EB829CE00889CF8 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 48B2D92C1EB829CE00889CF8 /* info.png */; };
@@ -37,6 +42,11 @@
 /* Begin PBXFileReference section */
 		08A6E76F65176ACB74403024 /* Pods-gMaps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gMaps.release.xcconfig"; path = "Pods/Target Support Files/Pods-gMaps/Pods-gMaps.release.xcconfig"; sourceTree = "<group>"; };
 		480DF1CC1EB6B30900B71488 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		481E5E591EC6ABE000AA47BA /* restaurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurant.png; sourceTree = "<group>"; };
+		481E5E5A1EC6ABE000AA47BA /* shopping_mall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopping_mall.png; sourceTree = "<group>"; };
+		481E5E5B1EC6ABE000AA47BA /* movie_theater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movie_theater.png; sourceTree = "<group>"; };
+		481E5E5C1EC6ABE000AA47BA /* art_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = art_gallery.png; sourceTree = "<group>"; };
+		481E5E611EC6ABE600AA47BA /* coffe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffe.png; sourceTree = "<group>"; };
 		48267DC81E8C84DD00337499 /* cloudy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudy.png; sourceTree = "<group>"; };
 		48267DCC1E8C888300337499 /* sunny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunny.png; sourceTree = "<group>"; };
 		48267DCE1E8C8CF300337499 /* rainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainy.png; sourceTree = "<group>"; };
@@ -49,10 +59,10 @@
 		4898D8C41E5FB80600FF29EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4898D8CA1E5FB8DF00FF29EB /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		48A7485B1E6BBA13001475C1 /* myLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLocation.png; sourceTree = "<group>"; };
-		48A9B0781EBA3B0C00A357D9 /* coffe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coffe.png; sourceTree = "<group>"; };
 		48A9B07A1EBCCFC700A357D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48A9B07C1EBE77EF00A357D9 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		48A9B07F1EBE803100A357D9 /* PlacesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlacesModel.xcdatamodel; sourceTree = "<group>"; };
+		48A9B08D1EBFF64200A357D9 /* CheckButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckButtonView.swift; sourceTree = "<group>"; };
 		48B2D9281EB8293600889CF8 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		48B2D92A1EB8296600889CF8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		48B2D92C1EB829CE00889CF8 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
@@ -117,14 +127,19 @@
 				48B39B171EB6DA2900175A9A /* LoginViewController.swift */,
 				48B39B191EB6DACE00175A9A /* SettingsViewController.swift */,
 				48A9B07C1EBE77EF00A357D9 /* PlacesTableViewController.swift */,
+				48A9B08D1EBFF64200A357D9 /* CheckButtonView.swift */,
 				4898D8BC1E5FB80600FF29EB /* Main.storyboard */,
 				48267DC81E8C84DD00337499 /* cloudy.png */,
 				48267DCC1E8C888300337499 /* sunny.png */,
 				48B2D9301EB83A2100889CF8 /* search.png */,
 				48A9B07A1EBCCFC700A357D9 /* Assets.xcassets */,
 				48B2D9281EB8293600889CF8 /* settings.png */,
+				481E5E591EC6ABE000AA47BA /* restaurant.png */,
+				481E5E5A1EC6ABE000AA47BA /* shopping_mall.png */,
+				481E5E5B1EC6ABE000AA47BA /* movie_theater.png */,
+				481E5E611EC6ABE600AA47BA /* coffe.png */,
+				481E5E5C1EC6ABE000AA47BA /* art_gallery.png */,
 				48B2D92A1EB8296600889CF8 /* refresh.png */,
-				48A9B0781EBA3B0C00A357D9 /* coffe.png */,
 				48B39B211EB6F2D400175A9A /* drive.png */,
 				48B2D92C1EB829CE00889CF8 /* info.png */,
 				48267DCE1E8C8CF300337499 /* rainy.png */,
@@ -209,9 +224,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				48267DCF1E8C8CF300337499 /* rainy.png in Resources */,
+				481E5E5F1EC6ABE000AA47BA /* movie_theater.png in Resources */,
 				48B2D92B1EB8296600889CF8 /* refresh.png in Resources */,
+				481E5E5E1EC6ABE000AA47BA /* shopping_mall.png in Resources */,
+				481E5E621EC6ABE600AA47BA /* coffe.png in Resources */,
 				4898D8C31E5FB80600FF29EB /* LaunchScreen.storyboard in Resources */,
-				48A9B0791EBA3B0C00A357D9 /* coffe.png in Resources */,
 				48A9B07B1EBCCFC700A357D9 /* Assets.xcassets in Resources */,
 				48B39B221EB6F2D400175A9A /* drive.png in Resources */,
 				48267DC91E8C84DD00337499 /* cloudy.png in Resources */,
@@ -222,7 +239,9 @@
 				48A7485C1E6BBA13001475C1 /* myLocation.png in Resources */,
 				4898D8CB1E5FB8DF00FF29EB /* Podfile in Resources */,
 				48B2D9311EB83A2100889CF8 /* search.png in Resources */,
+				481E5E5D1EC6ABE000AA47BA /* restaurant.png in Resources */,
 				4898D8BE1E5FB80600FF29EB /* Main.storyboard in Resources */,
+				481E5E601EC6ABE000AA47BA /* art_gallery.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +309,7 @@
 				48C54DE31E89CF1C00C74AAD /* tempView.swift in Sources */,
 				48886D331E8AF1F6005AC1D8 /* PopupViewController.swift in Sources */,
 				48FBACD91EB58990003BA735 /* DestinationWeatherView.swift in Sources */,
+				48A9B08E1EBFF64200A357D9 /* CheckButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

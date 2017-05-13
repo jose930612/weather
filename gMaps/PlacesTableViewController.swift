@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+class PlaceTypeTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var placeTagLabel: UILabel!
+    @IBOutlet weak var checkTagIcon: CheckButtonView!
+}
+
 class PlacesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var placesArray = [NSManagedObject]()
@@ -72,34 +78,95 @@ class PlacesTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "place_type", for: indexPath)
         
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "place_type", for: indexPath) as! PlaceTypeTableViewCell
         
-        let checkButton = UIButton()
+        //let cell = CustomCell(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         
-        //checkButton.setTitle("+", for: .normal)
-        //checkButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        
-        //checkButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 23)
-        //checkButton.addTarget(self, action: #selector(GMStepper.plus), for: UIControlEvents.touchUpInside)
-        cell.addSubview(checkButton)
-        
-        checkButton.frame = CGRect(x: (cell.bounds.size.width - cell.bounds.size.height)-4, y: 10, width: cell.bounds.size.height-20, height: cell.bounds.size.height-20)
-        
-        cell.textLabel?.text = placesArray[indexPath.row].value(forKey: "type") as? String
+        cell.placeTagLabel.text = placesArray[indexPath.row].value(forKey: "type") as? String
         
         //print("\(placesArray[indexPath.row].value(forKey: "isSelected") as! Int)")
         
-        
         if placesArray[indexPath.row].value(forKey: "isSelected") as! Bool == true {
-            checkButton.layer.cornerRadius = 11.5
-            checkButton.backgroundColor = UIColor(red:0.56, green:1.00, blue:0.00, alpha:1.0)
+            
+            cell.checkTagIcon.isActive = true
+            cell.checkTagIcon.fillColor = UIColor(red:0.23, green:0.78, blue:0.44, alpha:1.0)
+            cell.checkTagIcon.strokeColor = UIColor(red:0.23, green:0.78, blue:0.44, alpha:1.0)
+        }else{
+            
+            cell.checkTagIcon.isActive = false
+            cell.checkTagIcon.fillColor = UIColor(red:0.23, green:0.78, blue:0.44, alpha:0.0)
+            cell.checkTagIcon.strokeColor = UIColor(red:0.48, green:0.47, blue:0.47, alpha:1.0)
         }
         
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Place_type")
+        
+        let cell = tableView.cellForRow(at: indexPath) as! PlaceTypeTableViewCell
+        
+        if cell.checkTagIcon.isActive == true {
+            
+            do {
+                let results = try context.fetch(request)
+                
+                if results.count > 0 {
+                    for result in results as! [NSManagedObject] {
+                        
+                        if (result.value(forKey: "type") as! String) == cell.placeTagLabel.text {
+                            result.setValue(false, forKey: "isSelected")
+                            //print(placeType)
+                        }
+                    }
+                } else {
+                    print("No results")
+                }
+                
+            } catch {
+                print("Couldn't fetch results")
+            }
+            
+            cell.checkTagIcon.isActive = false
+            cell.checkTagIcon.fillColor = UIColor(red:0.23, green:0.78, blue:0.44, alpha:0.0)
+            cell.checkTagIcon.strokeColor = UIColor(red:0.48, green:0.47, blue:0.47, alpha:1.0)
+            
+        }else{
+            
+            do {
+                let results = try context.fetch(request)
+                
+                if results.count > 0 {
+                    for result in results as! [NSManagedObject] {
+                        
+                        if (result.value(forKey: "type") as! String) == cell.placeTagLabel.text {
+                            result.setValue(false, forKey: "isSelected")
+                            //print(placeType)
+                        }
+                    }
+                } else {
+                    print("No results")
+                }
+                
+            } catch {
+                print("Couldn't fetch results")
+            }
+            
+            cell.checkTagIcon.isActive = true
+            cell.checkTagIcon.fillColor = UIColor(red:0.23, green:0.78, blue:0.44, alpha:1.0)
+            cell.checkTagIcon.strokeColor = UIColor(red:0.23, green:0.78, blue:0.44, alpha:1.0)
+            
+        }
+        
+    }
+    /*
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
@@ -108,13 +175,10 @@ class PlacesTableViewController: UIViewController, UITableViewDelegate, UITableV
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
+    */
     @IBAction func doneButton(_ sender: Any) {
-        
         self.dismiss(animated: true, completion: nil)
-        
     }
-    
     
 
     /*
