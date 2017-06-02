@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F71b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +21,49 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Weather_Travel.png" translatesAutoresizingMaskIntoConstraints="NO" id="CDN-cR-7pM">
+                                <rect key="frame" x="49.5" y="148" width="276" height="225"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CDN-cR-7pM" secondAttribute="height" multiplier="92:75" id="Bjt-mv-kAH"/>
+                                    <constraint firstAttribute="height" constant="225" id="F41-I5-Nqa"/>
+                                    <constraint firstAttribute="width" constant="276" id="ySb-eV-X3i"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3I-VY-NaN">
+                                <rect key="frame" x="49" y="373" width="276" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="c3I-VY-NaN" secondAttribute="height" multiplier="276:35" id="44H-n8-cGX"/>
+                                    <constraint firstAttribute="width" constant="276" id="N8P-66-jNn"/>
+                                    <constraint firstAttribute="height" constant="35" id="btS-iU-oZ5"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Travel Weather">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.99596098857777782" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="23" name="SmoothCirculars"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="CDN-cR-7pM" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="128" id="2pw-l5-PCZ"/>
+                            <constraint firstItem="c3I-VY-NaN" firstAttribute="top" secondItem="CDN-cR-7pM" secondAttribute="bottom" id="CrZ-C9-bZ3"/>
+                            <constraint firstItem="CDN-cR-7pM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="HWu-75-pG6"/>
+                            <constraint firstItem="c3I-VY-NaN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IJ7-n8-8iH"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Weather_Travel.png" width="1627" height="1319"/>
+    </resources>
 </document>

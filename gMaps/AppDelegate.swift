@@ -16,11 +16,14 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    override init() {
+        FIRApp.configure()
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FIRApp.configure()
         GMSServices.provideAPIKey("AIzaSyD-kWXXpAo2MM-JDa-2fi-d2og-o0A9pWQ")
         GMSPlacesClient.provideAPIKey("AIzaSyD-kWXXpAo2MM-JDa-2fi-d2og-o0A9pWQ")
         return true

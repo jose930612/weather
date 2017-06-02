@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import GoogleMaps
 import GooglePlaces
+import Firebase
 
 extension String {
     func replace(target: String, withString: String) -> String {
@@ -19,21 +20,34 @@ extension String {
 
 class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
     
-    let RESIZE_FACTOR = CGFloat(100.0)
+    var ref = FIRDatabase.database().reference()
+    
+    
+    @IBOutlet weak var barItem: UITabBarItem!
+    
+    let RESIZE_FACTOR = CGFloat(151.0)
     let screenSize = UIScreen.main.bounds
+    
+    var timer:Timer?
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var destinationWeatherView: DestinationWeatherView!
     @IBOutlet weak var temperature: tempView!
+    @IBOutlet weak var startTrip: UIButton!
     var popOverVC = PopupViewController()
+    var statsPopVC = StatsViewController()
     
     let locationManager = CLLocationManager()
     var placesMarkers:Dictionary<String,[GMSMarker]> = Dictionary<String,[GMSMarker]>()
+    var routePolyline:GMSPolyline!
     
     var pressureText:String!
     var humidityText:String!
     var weatherText:String!
     var weatherCode:Int!
+    
+    var originCoordinates:CLLocationCoordinate2D!
+    var destinationCoordinates:CLLocationCoordinate2D!
     
     var imgIconUrl:URL!
     var isStationAvailable = true
@@ -62,10 +76,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                  "movie_theater"]
     ]
     
-    let type = ["art_gallery","cafe", "movie_theater", "restaurant", "shopping_mall", "museum", "park", "restaurant", "zoo", "night_club"]
+    let type = ["art_gallery","cafe", "movie_theater", "shopping_mall", "museum", "park", "restaurant", "zoo", "night_club"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.startTrip.addTarget(self, action: #selector(ViewController.goGmap), for: UIControlEvents.touchUpInside)
+        
+        //self.mapView.frame = CGRect(x: 0, y: 0, width: self.screenSize.width, height: self.screenSize.height-51)
+        
+        /*var tabHeight = self.barItem.
+        
+        print(tabHeight)*/
+        
+        self.startTrip.isHidden = true
+        
         
         locationManager.delegate = self
         
@@ -73,13 +98,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
         temperature.detailPopup.addTarget(self, action: #selector(ViewController.popUpView), for: UIControlEvents.touchUpInside)
         
+        temperature.statsButton.addTarget(self, action: #selector(ViewController.popStatsView), for: UIControlEvents.touchUpInside)
+        
         temperature.refreshButton.addTarget(self, action: #selector(ViewController.updateWeather), for: UIControlEvents.touchUpInside)
+        
         destinationWeatherView.closeButton.addTarget(self, action: #selector(ViewController.closeWeatherDetails), for: UIControlEvents.touchUpInside)
         
         self.temperature.detailPopup.isHidden = true
         self.temperature.refreshButton.isHidden = true
         self.temperature.settingButton.isHidden = true
-        self.temperature.routeButton.isHidden = true
+        self.temperature.statsButton.isHidden = true
         self.destinationWeatherView.isHidden = true
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -95,8 +123,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             if results.count > 0 {
                 for result in results as! [NSManagedObject] {
                     result.setValue(false, forKey: "isSelected")
+                    
+                    let placeType = result.value(forKey: "type") as! String
+                    
+                    self.placesMarkers["\(placeType)"] = [GMSMarker]()
                 }
             } else {
+                
+                for typeValue in type {
+                    let placeType = NSEntityDescription.insertNewObject(forEntityName: "Place_type", into: context)
+                    placeType.setValue("\(typeValue)", forKey: "type")
+                    placeType.setValue(false, forKey: "isSelected")
+                    
+                    do {
+                        try context.save()
+                        print("saved")
+                    } catch {
+                        print("There was an error")
+                    }
+                }
                 print("No results")
             }
             
@@ -108,35 +153,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
-        for typeValue in type {
-            let placeType = NSEntityDescription.insertNewObject(forEntityName: "Place_type", into: context)
-            placeType.setValue("\(typeValue)", forKey: "type")
-            placeType.setValue(false, forKey: "isSelected")
-            
-            do {
-                try context.save()
-                print("saved")
-            } catch {
-                print("There was an error")
-            }
-        }
         */
+        
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         //print("Hola")
+        if self.isNearbyCalled == true {
+            updatePlace()
+        }
     }
     
     func updateWeather() {
-        if isStationAvailable {
-            print("stationDataRequest")
-            stationDataRequest(coordinates: (locationManager.location?.coordinate)!)
-        } else {
+        /*if isStationAvailable {
+            print("stationDataRequest")*/
+        stationDataRequest()
+            //stationDataRequest(coordinates: (locationManager.location?.coordinate)!)
+        /*} else {
             print("request")
             self.isNearbyCalled = false
             request(coordinates: (locationManager.location?.coordinate)!)
-        }
+        }*/
     }
     
     func popUpView() {
@@ -170,6 +208,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
+    func popStatsView() {
+        statsPopVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier :"statsPopupID") as! StatsViewController
+        self.addChildViewController(statsPopVC)
+        statsPopVC.view.frame = self.view.frame
+        self.view.addSubview(statsPopVC.view)
+        statsPopVC.didMove(toParentViewController: self)
+    }
+    
     @IBAction func searchButton(_ sender: Any) {
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
@@ -184,15 +230,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         self.mapView.camera = camera
         
         let position = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        
+        destinationCoordinates = place.coordinate
+        originCoordinates = locationManager.location?.coordinate
+        
+        self.destinationWeatherView.marker = GMSMarker(position: position)
+        self.destinationWeatherView.marker.title = "\(place.name)"
+        self.destinationWeatherView.marker.map = mapView
+        /*
         let marker = GMSMarker(position: position)
         marker.title = "\(place.name)"
         marker.map = mapView
+         */
         
         howsTheWeatherThere(placeName: place.name, coordinate: place.coordinate)
         
         //print(self.screenSize.height)
         
-        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: (self.screenSize.height-RESIZE_FACTOR))
+        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: (self.screenSize.height-self.destinationWeatherView.frame.height))
         
         self.dismiss(animated: true, completion: nil) // dismiss after select place
         
@@ -202,6 +257,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         destinationReverseGeocodeCoordinate(placeName: placeName, coordinate: coordinate)
         
         self.destinationWeatherView.isHidden = false
+        self.startTrip.isHidden = false
         
         destinationRequest (coordinates:coordinate)
     }
@@ -235,16 +291,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         if let location = locations.first {
             
             mapView.camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 17)
-            //print("SCREEEEEEEEEAM")
-            if isStationAvailable {
-                //print("Station is available")
-                stationDataRequest(coordinates: location.coordinate)
-            } else {
-                request(coordinates: location.coordinate)
-            }
             
-            /*self.myLocationMarker.position = location.coordinate
-            self.myLocationMarker.map = mapView*/
+            stationDataRequest()
+            timer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(ViewController.stationDataRequest), userInfo: nil, repeats: true)
             
             locationManager.stopUpdatingLocation()
         } else {
@@ -253,7 +302,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         
     }
     
-    func stationDataRequest(coordinates:CLLocationCoordinate2D) {
+    func stationDataRequest() {
+        
+        var coordinate:CLLocationCoordinate2D = (locationManager.location?.coordinate)!
         
         var weatherData:[String:Any]!
         let urlString = "http://weatherstation.local:8080/lastmeasure"
@@ -272,8 +323,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             guard error == nil else {
                 //print(error!)
                 //print("ERROR!!!!")
-                self.isStationAvailable = false
-                self.request(coordinates: coordinates)
+                //self.isStationAvailable = false
+                self.request(coordinates: coordinate)
                 return
             }
             guard let data = data else {
@@ -292,6 +343,44 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             }
             
             DispatchQueue.main.async(execute: {
+                
+                var weatherCodeURLString = "http://api.openweathermap.org/data/2.5/weather?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)&APPID=722e31fed4758ec43905b234ed67369d&lang=sp"
+                //print(directionsURLString)
+                
+                weatherCodeURLString = weatherCodeURLString.addingPercentEscapes(using: String.Encoding.utf8)!
+                let weatherCodeURL = NSURL(string: weatherCodeURLString)
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    let weatherCodeData = NSData(contentsOf: weatherCodeURL! as URL)
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: weatherCodeData as! Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String, AnyObject>
+                        
+                        //let json = try! JSONSerialization.jsonObject(with: weatherCodeData, options: []) as! Dictionary<String, AnyObject>
+                        
+                        let results:Dictionary<String, AnyObject>! = json
+                        
+                        if let weather = results["weather"] as? [[String:Any]], !weather.isEmpty {
+                            
+                            self.weatherText = "\(weather[0]["description"]!)"
+                            
+                            self.weatherCode = NumberFormatter().number(from: "\(weather[0]["id"]!)") as! Int!
+                        }
+                        
+                        if self.isNearbyCalled == false {
+                            self.isNearbyCalled = true
+                            self.setPlacesInMap(coordinates: coordinate, weathercode:self.weatherCode)
+                        }
+                        
+                        
+                        
+                        
+                    } catch {
+                        print("catch")
+                    }
+                })
+                
+                self.writeFirebase(temperature: Float("\(weatherData["temperature"]!)")!,humidity: Int("\(weatherData["humidity"]!)")!,pressure: Float("\(weatherData["pressure"]!)")!, coordinates: coordinate)
                 
                 self.weatherCode = 800
                 self.weatherText = "--"
@@ -404,8 +493,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     func closeWeatherDetails(){
         self.destinationWeatherView.isHidden = true
-        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: self.screenSize.height)
+        self.startTrip.isHidden = true
+        
+        //self.destinationWeatherView.marker.map = nil
+        //self.routePolyline.map = nil
+        
+        self.mapView.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.width, height: (self.mapView.frame.height+self.destinationWeatherView.frame.height))
         self.mapView.clear()
+        updatePlace()
+        
         mapView.camera = GMSCameraPosition.camera(withLatitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!, zoom: 17)
     }
     
@@ -500,10 +596,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                         let route = step["polyline"]?["points"] as! String
                         
                         let path: GMSPath = GMSPath(fromEncodedPath: route)!
-                        let routePolyline = GMSPolyline(path: path)
-                        routePolyline.map = self.mapView
-                        routePolyline.strokeColor = UIColor(red: 44/255, green: 134/255, blue: 200/255, alpha:1)
-                        routePolyline.strokeWidth = 4.0
+                        self.routePolyline = GMSPolyline(path: path)
+                        self.routePolyline.map = self.mapView
+                        self.routePolyline.strokeColor = UIColor(red: 44/255, green: 134/255, blue: 200/255, alpha:1)
+                        self.routePolyline.strokeWidth = 4.0
                         
                     }
                     /*
@@ -604,7 +700,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     func myNearByPlaces(coordinates:CLLocationCoordinate2D) {
         
         
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -677,6 +772,79 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
                                 print("catch")
                             }
                         })
+                    }
+                }
+            } else
+            {
+                print("No results")
+            }
+            
+        } catch {
+            print("Couldn't fetch results")
+        }
+    }
+    
+    func goGmap(){
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            UIApplication.shared.openURL(NSURL(string:
+                "comgooglemaps://?saddr=\(Float(originCoordinates.latitude)),\(Float(originCoordinates.longitude))&daddr=\(Float(destinationCoordinates.latitude)),\(Float(destinationCoordinates.longitude))&directionsmode=driving")! as URL)
+            
+        } else {
+            NSLog("Can't use comgooglemaps://");
+        }
+    }
+    
+    func writeFirebase(temperature:Float, humidity:Int, pressure:Float, coordinates:CLLocationCoordinate2D){
+        let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        
+        let year =  components.year!
+        let month = components.month!
+        let day = components.day!
+        let hour = components.hour!
+        let minute = components.minute!
+        
+        var dateString = "\(month)-\(day)-\(year)"
+        var timeString = "\(hour):\(minute)"
+        
+        self.ref.child("weather").child("\(dateString)/\(timeString)").setValue(
+            ["temperature":temperature,
+             "humidity":humidity,
+             "pressure":pressure,
+             "latitude":coordinates.latitude,
+             "longitude":coordinates.longitude]
+        )
+    }
+    
+    func updatePlace(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Place_type")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    
+                    if (result.value(forKey: "isSelected") as! Bool) == false {
+                        let placeType = result.value(forKey: "type") as! String
+                        if self.placesMarkers["\(placeType)"]?.isEmpty == false{
+                            for (index, place) in (self.placesMarkers["\(placeType)"]?.enumerated())! {
+                                place.map = nil
+                            }
+                        }
+                    }else{
+                        let placeType = result.value(forKey: "type") as! String
+                        if self.placesMarkers["\(placeType)"]?.isEmpty == false{
+                            for (index, place) in (self.placesMarkers["\(placeType)"]?.enumerated())! {
+                                place.map = mapView
+                            }
+                        }
                     }
                 }
             } else {

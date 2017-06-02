@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @IBDesignable class DestinationWeatherView: UIView {
     
@@ -39,6 +40,8 @@ import UIKit
     let pressureLabel = UILabel()
     let locationLabel = UILabel()
     let closeButton = UIButton()
+    
+    var marker:GMSMarker = GMSMarker()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!

@@ -17,7 +17,7 @@ let NoOfGlasses = 8
     let detailPopup = UIButton()
     let refreshButton = UIButton()
     let settingButton = UIButton()
-    let routeButton = UIButton()
+    let statsButton = UIButton()
     
     @IBInspectable var counterColor: UIColor = UIColor(red:0.26, green:0.52, blue:0.96, alpha:1.0)
     
@@ -99,18 +99,18 @@ let NoOfGlasses = 8
         
         
         //routeButton.setTitle("R", for: .normal)
-        routeButton.setImage(UIImage(named: "drive.png"), for: .normal)
+        statsButton.setImage(UIImage(named: "graph.png"), for: .normal)
         //routeButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         //routeButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        routeButton.backgroundColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0)
-        routeButton.layer.cornerRadius = 10
+        statsButton.backgroundColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0)
+        statsButton.layer.cornerRadius = 10
         //detailPopup.layer.borderColor = UIColor(hue: 0, saturation: 1, brightness: 1, alpha: 0.6).cgColor
         //detailPopup.layer.borderWidth = 2
         
-        routeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-        addSubview(routeButton)
+        statsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+        addSubview(statsButton)
         
-        routeButton.frame = CGRect(x: (bounds.size.width-32), y: (bounds.size.height/2)-16, width: 32, height: 32)
+        statsButton.frame = CGRect(x: (bounds.size.width-32), y: (bounds.size.height/2)-16, width: 32, height: 32)
         
         
         //settingButton.setTitle("I", for: .normal)
@@ -195,7 +195,7 @@ let NoOfGlasses = 8
         self.detailPopup.isHidden = false
         self.refreshButton.isHidden = false
         self.settingButton.isHidden = false
-        self.routeButton.isHidden = false
+        self.statsButton.isHidden = false
         self.fontSize = 22
     }
     
@@ -211,6 +211,9 @@ let NoOfGlasses = 8
             let refreshPositionY = refreshButton.frame.origin.y + (refreshButton.frame.height/2)
             let refreshPositionX = refreshButton.frame.origin.x + (refreshButton.frame.width/2)
             
+            let statsPositionY = statsButton.frame.origin.y + (statsButton.frame.height/2)
+            let statsPositionX = statsButton.frame.origin.x + (statsButton.frame.width/2)
+            
             let refreshBtnDistX = currentPoint.x - refreshPositionX
             let refreshBtnDistY = refreshPositionY - currentPoint.y
             
@@ -218,6 +221,9 @@ let NoOfGlasses = 8
             
             let infoBtnDistX = currentPoint.x - infoPositionX
             let infoBtnDistY = infoPositionY - currentPoint.y
+            
+            let statsBtnDistX = currentPoint.x - statsPositionX
+            let statsBtnDistY = statsPositionY - currentPoint.y
             
             //print("distanceX: \(infoBtnDistX), distanceY: \(infoBtnDistY)")
             if (infoBtnDistX >= -10 && infoBtnDistX <= 10) && (infoBtnDistY >= -10 && infoBtnDistY <= 10) {
@@ -227,13 +233,17 @@ let NoOfGlasses = 8
             if (refreshBtnDistY >= -10 && refreshBtnDistY <= 10) && (refreshBtnDistX >= -10 && refreshBtnDistX <= 10) {
                 self.refreshButton.sendActions(for: .touchUpInside)
             }
+            
+            if (statsBtnDistY >= -10 && statsBtnDistY <= 10) && (statsBtnDistX >= -10 && statsBtnDistX <= 10) {
+                self.statsButton.sendActions(for: .touchUpInside)
+            }
         }
         self.radius = max(72.0, 72.0)
         self.shrink = 0.0
         self.detailPopup.isHidden = true
         self.refreshButton.isHidden = true
         self.settingButton.isHidden = true
-        self.routeButton.isHidden = true
+        self.statsButton.isHidden = true
         self.fontSize = 15
     }
     

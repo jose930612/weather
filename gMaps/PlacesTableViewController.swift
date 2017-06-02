@@ -147,7 +147,13 @@ class PlacesTableViewController: UIViewController, UITableViewDelegate, UITableV
                     for result in results as! [NSManagedObject] {
                         
                         if (result.value(forKey: "type") as! String) == cell.placeTagLabel.text {
-                            result.setValue(false, forKey: "isSelected")
+                            
+                            if (result.value(forKey: "isSelected") as! Bool) == false {
+                                result.setValue(true, forKey: "isSelected")
+                            }else{
+                                result.setValue(false, forKey: "isSelected")
+                            }
+                            
                             //print(placeType)
                         }
                     }
